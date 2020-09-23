@@ -43,7 +43,7 @@ namespace PonderingProgrammer.Dajumble.Web.Areas.Identity.Pages.Account
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        public class InputModel
+        public class InputModel : IValidatableObject
         {
             [Required]
             [StringLength(39, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 1)]
@@ -65,6 +65,11 @@ namespace PonderingProgrammer.Dajumble.Web.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+            {
+                return UserNameValidator.ValidateUserName(UserName).Select(error => new ValidationResult(error));
+            }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
