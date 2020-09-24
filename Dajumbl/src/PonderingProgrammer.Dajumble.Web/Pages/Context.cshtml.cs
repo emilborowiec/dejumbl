@@ -1,22 +1,42 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PonderingProgrammer.Dajumble.Web.Data;
+using PonderingProgrammer.Dajumble.Web.Model;
 
 namespace PonderingProgrammer.Dajumble.Web.Pages
 {
     public class ContextModel : PageModel
     {
-        public void OnGet()
+        private readonly ApplicationDbContext _dbContext;
+        private readonly ContextRepository _repository;
+
+        public ContextModel(ApplicationDbContext dbContext, ContextRepository repository)
         {
-            
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public ActionResult OnPostAsync()
+        [BindProperty]
+        public InputModel Input { get; set; }
+
+        public void OnGet()
         {
+        }
+
+        public ActionResult OnPost()
+        {
+            if (ModelState.IsValid)
+            {
+                var context = new Context(User.GetUserId()) {Name = Input.Name, Description = Input.Description};
+                _repository.Add(context);
+                _dbContext.SaveChanges();
+                return RedirectToPage("/Index");
+            }
             return Page();
         }
         
-        public InputModel Input { get; set; }
 
         public class InputModel
         {
