@@ -82,9 +82,21 @@ namespace PonderingProgrammer.Dajumble.Web.Areas.Identity.Pages.Account
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            if (ModelState.IsValid)
+            {
+                var errors = ValidateUniqueUserNameAndEmail(Input.UserName, Input.Email);
+                await foreach (var error in errors)
+                {
+                    ModelState.AddModelError(string.Empty, error);
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser { UserName = Input.UserName, Email = Input.Email };
+
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -119,6 +131,18 @@ namespace PonderingProgrammer.Dajumble.Web.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private async IAsyncEnumerable<string> ValidateUniqueUserNameAndEmail(string userName, string email)
+        {
+            if (await _userManager.FindByNameAsync(userName) != null)
+            {
+                yield return "Given username is taken";
+            }
+            if (await _userManager.FindByEmailAsync(email) != null)
+            {
+                yield return "Given email is in use by existing user";
+            }
         }
     }
 }
