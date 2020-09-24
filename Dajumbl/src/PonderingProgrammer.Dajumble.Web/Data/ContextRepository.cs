@@ -23,5 +23,10 @@ namespace PonderingProgrammer.Dajumble.Web.Data
         {
             return _dbContext.Contexts.Where(c => c.OwnerUserId == userId).ToList();
         }
+
+        public List<Context> GetAll()
+        {
+            return _dbContext.Contexts.ToList();
+        }
     }
 }
