@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PonderingProgrammer.Dajumble.Web.Model;
 
 namespace PonderingProgrammer.Dajumble.Web.Data
 {
@@ -12,5 +13,7 @@ namespace PonderingProgrammer.Dajumble.Web.Data
             : base(options)
         {
         }
+
+        public DbSet<Context> Contexts { get; set; }
     }
 }
