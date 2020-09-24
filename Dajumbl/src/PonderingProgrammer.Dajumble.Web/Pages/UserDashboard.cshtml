@@ -1,5 +1,7 @@
 ﻿@page
+@using Microsoft.AspNetCore.Authorization
 @model UserDashboardModel
+@attribute [Authorize]
 
 @{
     ViewData["Title"] = "Dashboard of " + @Model.UserName;
