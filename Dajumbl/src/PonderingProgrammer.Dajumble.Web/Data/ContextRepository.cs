@@ -28,5 +28,10 @@ namespace PonderingProgrammer.Dajumble.Web.Data
         {
             return _dbContext.Contexts.ToList();
         }
+
+        public Context FindById(string id)
+        {
+            return _dbContext.Contexts.SingleOrDefault(context => context.Id == id);
+        }
     }
 }

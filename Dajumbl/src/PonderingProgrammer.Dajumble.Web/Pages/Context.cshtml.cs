@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PonderingProgrammer.Dajumble.Web.Data;
@@ -9,41 +8,26 @@ namespace PonderingProgrammer.Dajumble.Web.Pages
 {
     public class ContextModel : PageModel
     {
-        private readonly ApplicationDbContext _dbContext;
         private readonly ContextRepository _repository;
 
-        public ContextModel(ApplicationDbContext dbContext, ContextRepository repository)
+        public ContextModel(ContextRepository repository)
         {
-            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        [BindProperty]
-        public InputModel Input { get; set; }
+        public Context Context { get; set; }
 
-        public void OnGet()
+        public IActionResult OnGet(string id)
         {
-        }
-
-        public ActionResult OnPost()
-        {
-            if (ModelState.IsValid)
+            var context = _repository.FindById(id);
+            if (context == null)
             {
-                var context = new Context(User.GetUserId()) {Name = Input.Name, Description = Input.Description};
-                _repository.Add(context);
-                _dbContext.SaveChanges();
-                return RedirectToPage("/Index");
+                return NotFound();
             }
-            return Page();
-        }
-        
 
-        public class InputModel
-        {
-            [Required]
-            public string Name { get; set; }
-            [DataType(DataType.MultilineText)]
-            public string Description { get; set; }
+            Context = context;
+            
+            return Page();
         }
     }
 }
