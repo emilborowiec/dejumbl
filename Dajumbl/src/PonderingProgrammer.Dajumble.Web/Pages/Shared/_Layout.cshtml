@@ -19,6 +19,7 @@
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <partial name="_LoginPartial"/>
                 @if (User.Identity.IsAuthenticated) {
+                    <a asp-page="/UserDashboard"><input type="button" class="btn" value="Dashboard"/></a>
                     <a asp-page="/Context"><input type="button" class="btn btn-primary" value="New Context"/></a>
                 }
                 <ul class="navbar-nav flex-grow-1">

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using PonderingProgrammer.Dajumble.Web.Model;
 
 namespace PonderingProgrammer.Dajumble.Web.Data
@@ -15,6 +17,11 @@ namespace PonderingProgrammer.Dajumble.Web.Data
         public void Add(Context context)
         {
             _dbContext.Contexts.Add(context);
+        }
+
+        public List<Context> FindUserOwnedContexts(string userId)
+        {
+            return _dbContext.Contexts.Where(c => c.OwnerUserId == userId).ToList();
         }
     }
 }
