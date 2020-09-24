@@ -8,3 +8,12 @@
 }
 
 <h1>@Model.UserName Dashboard</h1>
+
+<h2>Owned contexts</h2>
+<dl>
+    @foreach(var context in Model.Contexts)
+    {
+        <dt>@context.Name</dt>
+        <dd>@context.Description</dd>
+    }
+</dl>
