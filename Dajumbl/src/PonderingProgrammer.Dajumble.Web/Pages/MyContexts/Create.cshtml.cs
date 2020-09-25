@@ -7,14 +7,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using PonderingProgrammer.Dajumble.Web.Data;
 using PonderingProgrammer.Dajumble.Web.Model;
 
-namespace PonderingProgrammer.Dajumble.Web.Pages
+namespace PonderingProgrammer.Dajumble.Web.Pages.MyContexts
 {
-    public class NewContextModel : PageModel
+    public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly ContextRepository _repository;
 
-        public NewContextModel(ApplicationDbContext dbContext, ContextRepository repository)
+        public CreateModel(ApplicationDbContext dbContext, ContextRepository repository)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
@@ -40,7 +40,7 @@ namespace PonderingProgrammer.Dajumble.Web.Pages
                 var context = new Context(User.Identity.Name, Input.ContextKey) {Name = Input.Name, Description = Input.Description};
                 _repository.Add(context);
                 _dbContext.SaveChanges();
-                return RedirectToPage($"/MyContexts/Details/", new { ownerUserName = context.OwnerUserName, contextKey = context.ContextKey });
+                return RedirectToPage($"/MyContexts/Details", new { contextKey = context.ContextKey });
             }
             
             return Page();

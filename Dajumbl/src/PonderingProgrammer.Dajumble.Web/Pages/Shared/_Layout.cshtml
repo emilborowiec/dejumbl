@@ -20,7 +20,7 @@
                 <partial name="_LoginPartial"/>
                 @if (User.Identity.IsAuthenticated) {
                     <a asp-page="/UserDashboard"><input type="button" class="btn" value="Dashboard"/></a>
-                    <a asp-page="/NewContext"><input type="button" class="btn btn-primary" value="New Context"/></a>
+                    <a asp-page="/MyContexts/Create"><input type="button" class="btn btn-primary" value="New Context"/></a>
                 }
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">

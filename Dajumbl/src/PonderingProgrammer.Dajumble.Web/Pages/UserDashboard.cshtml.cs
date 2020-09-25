@@ -21,7 +21,7 @@ namespace PonderingProgrammer.Dajumble.Web.Pages
         public void OnGet()
         {
             UserName = User.Identity.Name;
-            Contexts = _contextRepository.FindUserOwnedContexts(User.GetUserId());
+            Contexts = _contextRepository.FindUserOwnedContexts(User.Identity.Name);
         }
     }
 }

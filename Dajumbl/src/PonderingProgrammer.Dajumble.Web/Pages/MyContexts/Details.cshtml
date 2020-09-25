@@ -1,0 +1,12 @@
+﻿@page "{contextKey}"
+@using Microsoft.AspNetCore.Authorization
+@model DetailsModel
+@attribute [Authorize]
+
+@{
+    ViewData["Title"] = @Model.Context.Name;
+}
+
+<h1>@Model.Context.Name</h1>
+
+<a asp-page="/MyContexts/Edit" asp-route-ContextKey="@Model.Context.ContextKey"><input type="button" class="btn btn-primary" value="Edit"/></a>
