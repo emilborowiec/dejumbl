@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PonderingProgrammer.Dajumble.Web.Model;
 
 namespace PonderingProgrammer.Dajumble.Web.Data
@@ -32,6 +33,13 @@ namespace PonderingProgrammer.Dajumble.Web.Data
         public Context Get(string ownerUserName, string contextKey)
         {
             return _dbContext.Contexts.SingleOrDefault(context => context.OwnerUserName == ownerUserName && context.ContextKey == contextKey);
+        }
+
+        public Context GetWithRelations(string ownerUserName, string contextKey)
+        {
+            return _dbContext.Contexts
+                             .Include(c => c.Items)
+                             .SingleOrDefault(context => context.OwnerUserName == ownerUserName && context.ContextKey == contextKey);
         }
     }
 }

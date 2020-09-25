@@ -19,7 +19,7 @@ namespace PonderingProgrammer.Dajumble.Web.Pages.MyContexts
 
         public IActionResult OnGet(string contextKey)
         {
-            Context = _repository.Get(User.Identity.Name, contextKey);
+            Context = _repository.GetWithRelations(User.Identity.Name, contextKey);
             if (Context == null) return NotFound();
             return Page();
         }
