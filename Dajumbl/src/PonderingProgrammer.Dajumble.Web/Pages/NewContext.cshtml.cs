@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PonderingProgrammer.Dajumble.Web.Data;
@@ -29,23 +31,41 @@ namespace PonderingProgrammer.Dajumble.Web.Pages
         {
             if (ModelState.IsValid)
             {
+                var error = ValidateUniqueContext(User.Identity.Name, Input.ContextKey);
+                if (error != null) ModelState.AddModelError(string.Empty, error);
+            }
+
+            if (ModelState.IsValid)
+            {
                 var context = new Context(User.Identity.Name, Input.ContextKey) {Name = Input.Name, Description = Input.Description};
                 _repository.Add(context);
                 _dbContext.SaveChanges();
                 return RedirectToPage($"/MyContexts/Details/", new { ownerUserName = context.OwnerUserName, contextKey = context.ContextKey });
             }
+            
             return Page();
         }
-        
 
-        public class InputModel
+        private string ValidateUniqueContext(string ownerUserName, string contextKey)
+        {
+            return _repository.Get(ownerUserName, contextKey) != null ? $"Context {ownerUserName}/{contextKey} already exists." : null;
+        }
+
+        public class InputModel : IValidatableObject
         {
             [Required]
             public string Name { get; set; }
+            
             [Required]
             public string ContextKey { get; set; }
+            
             [DataType(DataType.MultilineText)]
             public string Description { get; set; }
+
+            public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+            {
+                return Validators.ValidateForUrlFriendliness(ContextKey).Select(error => new ValidationResult(error, new [] { nameof(ContextKey) }));
+            }
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -68,7 +67,7 @@ namespace PonderingProgrammer.Dajumble.Web.Areas.Identity.Pages.Account
 
             public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
             {
-                return UserNameValidator.ValidateUserName(UserName).Select(error => new ValidationResult(error));
+                return Validators.ValidateForUrlFriendliness(UserName).Select(error => new ValidationResult(error, new [] { nameof(UserName) }));
             }
         }
 
