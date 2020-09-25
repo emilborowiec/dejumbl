@@ -9,4 +9,16 @@
 
 <h1>@Model.Context.Name</h1>
 
+<p>@Model.Context.Description</p>
+
 <a asp-page="/MyContexts/Edit" asp-route-ContextKey="@Model.Context.ContextKey"><input type="button" class="btn btn-primary" value="Edit"/></a>
+
+<table class="table">
+    @foreach (var item in @Model.Context.Items)
+    {
+        <tr>
+            <td>@item.Label</td>
+            <td>@item.ItemType</td>
+        </tr>
+    }
+</table>
