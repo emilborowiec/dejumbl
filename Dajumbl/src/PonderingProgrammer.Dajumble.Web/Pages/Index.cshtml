@@ -12,6 +12,6 @@
     <h2>Contexts</h2>
     @foreach (var context in @Model.Contexts)
     {
-        <p><b>@context.Name</b> - @context.Description</p>
+        <p><a asp-page="/Context" asp-route-ownerUserName="@context.OwnerUserName" asp-route-contextKey="@context.ContextKey"><b>@context.Name</b></a> - @context.Description</p>
     }
 </div>
