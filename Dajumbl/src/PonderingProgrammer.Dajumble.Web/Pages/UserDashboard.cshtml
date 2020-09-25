@@ -13,7 +13,7 @@
 <dl>
     @foreach(var context in Model.Contexts)
     {
-        <dt><a asp-page="/Context" asp-route-id="@context.Id">@context.Name</a></dt>
+        <dt>@context.Name</dt>
         <dd>@context.Description</dd>
     }
 </dl>

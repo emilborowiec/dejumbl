@@ -8,14 +8,14 @@ namespace PonderingProgrammer.Dajumble.Web.Model
     {
         private List<ContentItem> _items = new List<ContentItem>();
         
-        public Context(string ownerUserId)
+        public Context(string ownerUserName, string contextKey)
         {
-            Id = Guid.NewGuid().ToString();
-            OwnerUserId = ownerUserId;
+            OwnerUserName = ownerUserName ?? throw new ArgumentNullException(nameof(ownerUserName));
+            ContextKey = contextKey ?? throw new ArgumentNullException(nameof(contextKey));
         }
 
-        public string Id { get; private set; }
-        public string OwnerUserId { get; private set; }
+        public string OwnerUserName { get; private set; }
+        public string ContextKey { get; private set; }
         public string Name { get; set; }
         public string Description { get; set; }
 

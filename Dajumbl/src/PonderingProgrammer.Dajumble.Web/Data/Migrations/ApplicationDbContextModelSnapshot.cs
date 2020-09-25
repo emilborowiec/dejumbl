@@ -220,7 +220,10 @@ namespace PonderingProgrammer.Dajumble.Web.Data.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ContextId")
+                    b.Property<string>("ContextKey")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ContextOwnerUserName")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Item")
@@ -231,14 +234,17 @@ namespace PonderingProgrammer.Dajumble.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContextId");
+                    b.HasIndex("ContextOwnerUserName", "ContextKey");
 
                     b.ToTable("ContentItem");
                 });
 
             modelBuilder.Entity("PonderingProgrammer.Dajumble.Web.Model.Context", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("OwnerUserName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ContextKey")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -247,10 +253,7 @@ namespace PonderingProgrammer.Dajumble.Web.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("OwnerUserId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
+                    b.HasKey("OwnerUserName", "ContextKey");
 
                     b.ToTable("Contexts");
                 });
@@ -310,7 +313,7 @@ namespace PonderingProgrammer.Dajumble.Web.Data.Migrations
                 {
                     b.HasOne("PonderingProgrammer.Dajumble.Web.Model.Context", null)
                         .WithMany("Items")
-                        .HasForeignKey("ContextId");
+                        .HasForeignKey("ContextOwnerUserName", "ContextKey");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,10 +1,15 @@
-﻿@page "{id}"
+﻿@page "{ownerUserName}/{contextKey}"
 @model ContextModel
 
 @{
     ViewData["Title"] = @Model.Context.Name;
 }
 
-<h1>@Model.Context.Name by @Model.OwnerUserName</h1>
+<h1>@Model.Context.Name by @Model.Context.OwnerUserName</h1>
 
 <p>@Model.Context.Description</p>
+
+@if (@Model.OwnedByCurrentUser)
+{
+    
+}

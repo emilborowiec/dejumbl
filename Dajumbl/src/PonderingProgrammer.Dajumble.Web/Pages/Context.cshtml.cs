@@ -20,27 +20,17 @@ namespace PonderingProgrammer.Dajumble.Web.Pages
 
         public Context Context { get; set; }
         public bool OwnedByCurrentUser { get; set; }
-        public string OwnerUserName { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(string ownerUserName, string contextKey)
         {
-            var context = _repository.FindById(id);
+            var context = _repository.Get(ownerUserName, contextKey);
             if (context == null)
             {
                 return NotFound();
             }
 
             Context = context;
-            OwnedByCurrentUser = context.OwnerUserId == User.GetUserId(); 
-            if (OwnedByCurrentUser)
-            {
-                OwnerUserName = User.Identity.Name;
-            }
-            else
-            {
-                var ownerUser = await _userManager.FindByIdAsync(context.OwnerUserId);
-                OwnerUserName = ownerUser?.UserName ?? "unknown user";
-            }
+            OwnedByCurrentUser = context.OwnerUserName == User.Identity.Name; 
             
             return Page();
         }

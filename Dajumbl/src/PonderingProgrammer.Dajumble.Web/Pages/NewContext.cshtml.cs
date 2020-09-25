@@ -29,10 +29,10 @@ namespace PonderingProgrammer.Dajumble.Web.Pages
         {
             if (ModelState.IsValid)
             {
-                var context = new Context(User.GetUserId()) {Name = Input.Name, Description = Input.Description};
+                var context = new Context(User.Identity.Name, Input.ContextKey) {Name = Input.Name, Description = Input.Description};
                 _repository.Add(context);
                 _dbContext.SaveChanges();
-                return RedirectToPage($"/Context", new { id = context.Id });
+                return RedirectToPage($"/MyContexts/Details/", new { ownerUserName = context.OwnerUserName, contextKey = context.ContextKey });
             }
             return Page();
         }
@@ -42,6 +42,8 @@ namespace PonderingProgrammer.Dajumble.Web.Pages
         {
             [Required]
             public string Name { get; set; }
+            [Required]
+            public string ContextKey { get; set; }
             [DataType(DataType.MultilineText)]
             public string Description { get; set; }
         }

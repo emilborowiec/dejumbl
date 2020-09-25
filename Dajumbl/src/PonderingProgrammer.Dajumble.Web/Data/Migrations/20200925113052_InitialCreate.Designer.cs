@@ -9,8 +9,8 @@ using PonderingProgrammer.Dajumble.Web.Data;
 namespace PonderingProgrammer.Dajumble.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200924090957_AddContext")]
-    partial class AddContext
+    [Migration("20200925113052_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -214,9 +214,39 @@ namespace PonderingProgrammer.Dajumble.Web.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PonderingProgrammer.Dajumble.Web.Model.Context", b =>
+            modelBuilder.Entity("PonderingProgrammer.Dajumble.Web.Model.ContentItem", b =>
                 {
                     b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ContextKey")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ContextOwnerUserName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Item")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Label")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContextOwnerUserName", "ContextKey");
+
+                    b.ToTable("ContentItem");
+                });
+
+            modelBuilder.Entity("PonderingProgrammer.Dajumble.Web.Model.Context", b =>
+                {
+                    b.Property<string>("OwnerUserName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ContextKey")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -225,10 +255,7 @@ namespace PonderingProgrammer.Dajumble.Web.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("OwnerUserId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
+                    b.HasKey("OwnerUserName", "ContextKey");
 
                     b.ToTable("Contexts");
                 });
@@ -282,6 +309,13 @@ namespace PonderingProgrammer.Dajumble.Web.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PonderingProgrammer.Dajumble.Web.Model.ContentItem", b =>
+                {
+                    b.HasOne("PonderingProgrammer.Dajumble.Web.Model.Context", null)
+                        .WithMany("Items")
+                        .HasForeignKey("ContextOwnerUserName", "ContextKey");
                 });
 #pragma warning restore 612, 618
         }

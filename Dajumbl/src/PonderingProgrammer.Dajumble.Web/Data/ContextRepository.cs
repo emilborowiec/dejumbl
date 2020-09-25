@@ -19,9 +19,9 @@ namespace PonderingProgrammer.Dajumble.Web.Data
             _dbContext.Contexts.Add(context);
         }
 
-        public List<Context> FindUserOwnedContexts(string userId)
+        public List<Context> FindUserOwnedContexts(string username)
         {
-            return _dbContext.Contexts.Where(c => c.OwnerUserId == userId).ToList();
+            return _dbContext.Contexts.Where(c => c.OwnerUserName == username).ToList();
         }
 
         public List<Context> GetAll()
@@ -29,9 +29,9 @@ namespace PonderingProgrammer.Dajumble.Web.Data
             return _dbContext.Contexts.ToList();
         }
 
-        public Context FindById(string id)
+        public Context Get(string ownerUserName, string contextKey)
         {
-            return _dbContext.Contexts.SingleOrDefault(context => context.Id == id);
+            return _dbContext.Contexts.SingleOrDefault(context => context.OwnerUserName == ownerUserName && context.ContextKey == contextKey);
         }
     }
 }
