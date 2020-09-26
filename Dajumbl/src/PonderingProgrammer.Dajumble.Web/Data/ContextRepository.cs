@@ -41,5 +41,12 @@ namespace PonderingProgrammer.Dajumble.Web.Data
                              .Include(c => c.Items)
                              .SingleOrDefault(context => context.OwnerUserName == ownerUserName && context.ContextKey == contextKey);
         }
+
+        public Context GetByContentItemId(string contentItemId)
+        {
+            return _dbContext.Contexts
+                             .Include(c => c.Items)
+                             .SingleOrDefault(c => c.Items.Any(i => i.Id == contentItemId));
+        }
     }
 }

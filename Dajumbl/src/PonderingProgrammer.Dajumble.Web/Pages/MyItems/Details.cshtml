@@ -1,0 +1,10 @@
+﻿@page "{id}"
+@using Microsoft.AspNetCore.Authorization
+@model DetailsModel
+@attribute[Authorize]
+
+@{
+    ViewData["Title"] = @Model.ContentItem.Label;
+}
+
+<h1>@Model.ContentItem.Label</h1>
