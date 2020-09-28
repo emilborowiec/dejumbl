@@ -1,10 +1,32 @@
 ﻿@page "{id}"
 @using Microsoft.AspNetCore.Authorization
 @model DetailsModel
-@attribute[Authorize]
+@attribute [Authorize]
 
 @{
     ViewData["Title"] = @Model.ContentItem.Label;
 }
 
 <h1>@Model.ContentItem.Label</h1>
+<p>@Model.ContentItem.ItemType</p>
+<p>@Model.ContentItem.Content</p>
+<h3>Relations</h3>
+@foreach (var relation in @Model.ContentItem.OutgoingRelations)
+{
+    <p>@relation.RelationType: @relation.Target.Label</p>
+}
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Input.TargetItemId"></label>
+        <select asp-for="Input.TargetItemId" asp-items="@Model.TargetOptions" class="form-control"></select>
+        <span asp-validation-for="Input.TargetItemId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.RelationType"></label>
+        <select asp-for="Input.RelationType" asp-items="@Model.RelationTypeOptions" class="form-control"></select>
+        <span asp-validation-for="Input.RelationType" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add relation</button>
+</form>

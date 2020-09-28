@@ -17,7 +17,7 @@
     @foreach (var item in @Model.Context.Items)
     {
         <tr>
-            <td>@item.Label</td>
+            <td><a asp-page="/MyItems/Details" asp-route-id="@item.Id">@item.Label</a></td>
             <td>@item.ItemType</td>
         </tr>
     }
