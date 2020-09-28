@@ -18,9 +18,10 @@
 
 @section Scripts {
     <script type="text/javascript">
-        d3.select("#graph")
-            .graphviz()
-            .renderDot('@Html.Raw(Model.ContextGraphviz)')
-            .logEvents(true);
+        let viz = new Viz();
+        viz.renderSVGElement('@Html.Raw(Model.ContextGraphviz)')
+            .then(function(element) {
+                $("#graph").append(element);
+            });
     </script>
 }
