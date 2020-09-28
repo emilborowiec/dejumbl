@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Drawing;
+using GiGraph.Dot.Entities.Attributes.Enums;
+using GiGraph.Dot.Entities.Graphs;
+using GiGraph.Dot.Extensions;
 using PonderingProgrammer.Dajumble.Web.Model;
-using QuikGraph;
-using QuikGraph.Graphviz;
 
 namespace PonderingProgrammer.Dajumble.Web.Rendering
 {
@@ -9,20 +10,31 @@ namespace PonderingProgrammer.Dajumble.Web.Rendering
     {
         public static string ToGraphviz(this Context context)
         {
-            var edges = new List<TaggedEdge<ContentItem, RelationType>>();
+            var graph = new DotGraph(isDirected: true);
+
+            foreach (var item in context.Items)
+            {
+                graph.Nodes.Add(item.Id, attrs =>
+                {
+                    attrs.Label = item.Label;
+                    attrs.Style = DotStyles.Filled;
+                    attrs.FillColor = Color.Blue;
+                });
+            }
             
             foreach (var item in context.Items)
             {
                 foreach (var relation in item.OutgoingRelations)
                 {
-                    var edge = new TaggedEdge<ContentItem, RelationType>(item, relation.Target, relation.RelationType);
-                    edges.Add(edge);
+                    graph.Edges.Add(item.Id, relation.Target.Id, edge =>
+                    {
+                        edge.Attributes.Label = relation.RelationType.ToString();
+                        edge.Attributes.Color = Color.Red;
+                    });
                 }
             }
 
-            var graph = edges.ToAdjacencyGraph<ContentItem, TaggedEdge<ContentItem, RelationType>>();
-
-            return graph.ToGraphviz().Replace(System.Environment.NewLine, "");
+            return graph.Build().Replace(System.Environment.NewLine, "");
         }
     }
 }
