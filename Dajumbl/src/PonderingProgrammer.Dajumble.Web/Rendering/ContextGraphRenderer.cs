@@ -17,8 +17,9 @@ namespace PonderingProgrammer.Dajumble.Web.Rendering
                 graph.Nodes.Add(item.Id, attrs =>
                 {
                     attrs.Label = item.Label;
-                    attrs.Style = DotStyles.Filled;
-                    attrs.FillColor = Color.Blue;
+                    attrs.Style = DotStyles.Filled | DotStyles.Rounded;
+                    attrs.Shape = DotNodeShape.Box;
+                    attrs.FillColor = Color.Aquamarine;
                 });
             }
             
@@ -29,7 +30,7 @@ namespace PonderingProgrammer.Dajumble.Web.Rendering
                     graph.Edges.Add(item.Id, relation.Target.Id, edge =>
                     {
                         edge.Attributes.Label = relation.RelationType.ToString();
-                        edge.Attributes.Color = Color.Red;
+                        edge.Attributes.Color = Color.Black;
                     });
                 }
             }
