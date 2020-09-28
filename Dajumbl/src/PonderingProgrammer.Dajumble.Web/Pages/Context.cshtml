@@ -9,7 +9,18 @@
 
 <p>@Model.Context.Description</p>
 
+<div id="graph"></div>
+
 @if (@Model.OwnedByCurrentUser)
 {
     
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        d3.select("#graph")
+            .graphviz()
+            .renderDot('@Html.Raw(Model.ContextGraphviz)')
+            .logEvents(true);
+    </script>
 }

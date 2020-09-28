@@ -39,6 +39,7 @@ namespace PonderingProgrammer.Dajumble.Web.Data
         {
             return _dbContext.Contexts
                              .Include(c => c.Items)
+                             .ThenInclude(i => i.OutgoingRelations)
                              .SingleOrDefault(context => context.OwnerUserName == ownerUserName && context.ContextKey == contextKey);
         }
 
@@ -46,6 +47,7 @@ namespace PonderingProgrammer.Dajumble.Web.Data
         {
             return _dbContext.Contexts
                              .Include(c => c.Items)
+                             .ThenInclude(i => i.OutgoingRelations)
                              .SingleOrDefault(c => c.Items.Any(i => i.Id == contentItemId));
         }
     }
