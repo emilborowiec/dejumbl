@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{698A9E29-E84
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0CF7027A-4F48-4EF1-8331-7EB88B71737E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PonderingProgrammer.Dejumble.Web", "src\PonderingProgrammer.Dejumble.Web\PonderingProgrammer.Dejumble.Web.csproj", "{A828589B-BF49-4225-BACC-5B685658F77D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PonderingProgrammer.Dejumbl.Web", "src\PonderingProgrammer.Dejumbl.Web\PonderingProgrammer.Dejumbl.Web.csproj", "{A828589B-BF49-4225-BACC-5B685658F77D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
