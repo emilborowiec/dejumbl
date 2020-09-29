@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26124.0
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{698A9E29-E84C-49F3-9CAC-BAE2C119F0C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0CF7027A-4F48-4EF1-8331-7EB88B71737E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PonderingProgrammer.Dejumble.Web", "src\PonderingProgrammer.Dejumble.Web\PonderingProgrammer.Dejumble.Web.csproj", "{A828589B-BF49-4225-BACC-5B685658F77D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A828589B-BF49-4225-BACC-5B685658F77D} = {698A9E29-E84C-49F3-9CAC-BAE2C119F0C2}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A828589B-BF49-4225-BACC-5B685658F77D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A828589B-BF49-4225-BACC-5B685658F77D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A828589B-BF49-4225-BACC-5B685658F77D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A828589B-BF49-4225-BACC-5B685658F77D}.Debug|x64.Build.0 = Debug|Any CPU
+		{A828589B-BF49-4225-BACC-5B685658F77D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A828589B-BF49-4225-BACC-5B685658F77D}.Debug|x86.Build.0 = Debug|Any CPU
+		{A828589B-BF49-4225-BACC-5B685658F77D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A828589B-BF49-4225-BACC-5B685658F77D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A828589B-BF49-4225-BACC-5B685658F77D}.Release|x64.ActiveCfg = Release|Any CPU
+		{A828589B-BF49-4225-BACC-5B685658F77D}.Release|x64.Build.0 = Release|Any CPU
+		{A828589B-BF49-4225-BACC-5B685658F77D}.Release|x86.ActiveCfg = Release|Any CPU
+		{A828589B-BF49-4225-BACC-5B685658F77D}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
