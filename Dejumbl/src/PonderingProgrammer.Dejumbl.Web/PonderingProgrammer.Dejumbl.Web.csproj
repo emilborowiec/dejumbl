@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Update="app.db">
+        <None Update="app.db" CopyToPublishDirectory="Never">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
@@ -26,6 +26,7 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.1" />
     </ItemGroup>
 
     <ItemGroup>
